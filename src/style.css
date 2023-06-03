@@ -46,6 +46,11 @@ body {
     width: 100%;
     height: 100%;
     border: 1px solid grey;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2vw;
+    color: grey;
 }
 
 .ship {
@@ -53,14 +58,16 @@ body {
 }
 
 .hit {
-    background-color: red;
+    background-color: black;
+    font-weight: 900;
 }
 
 
 .miss {
-    background-color: grey;
+    color: grey;
 }
 
 .sunk {
-    border: 2px solid red;
+    background-color: red;
+    border: 1px solid red;
 }
