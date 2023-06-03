@@ -41,4 +41,8 @@ export class Player {
             while (!this.randomShip(shipTypes.type4)) {}
         }
     }
+
+    checkIfAnyHitNearby(pos1, pos2) {
+        return this.board.checkIfAnyHitNearby(pos1, pos2)
+    }
 }

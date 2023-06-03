@@ -20,7 +20,8 @@ export class GameBoard {
             return 'miss'
         }
 
-        this.board[x][y].ship.hit(this.board[x][y].i)
+        if (this.board[x][y].ship.hit(this.board[x][y].i) === false)
+            return false
         return 'hit'
     }
 
@@ -73,5 +74,21 @@ export class GameBoard {
             }
         }
         return true
+    }
+
+    checkIfAnyHitNearby(x, y) {
+        let dir = [-1, -1, 0, 1, 1, 0, -1, 1, -1]
+        for (let i = 0; i < 8; i++) {
+            let nx = x+dir[i]
+            let ny = y+dir[i+1]
+
+            if (nx >= 0 && ny >= 0 && nx < 10 && ny < 10) {
+                if (!this.board[nx][ny] || this.board[nx][ny] === 'res' || this.board[nx][ny] === 'miss')
+                    continue
+                if (this.board[nx][ny].ship.isHit(this.board[nx][ny].i))
+                    return true
+            }
+        }
+        return false
     }
 }

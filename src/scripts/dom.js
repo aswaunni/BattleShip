@@ -1,5 +1,6 @@
 import { p1, p2, initGame } from "./game"
 import { Player } from "./playerFactory"
+import { aiPlay, setHitPos } from "./aiBot"
 
 export function renderButtons() {
     const reset = document.querySelector('.reset-btn')
@@ -39,32 +40,41 @@ export function renderBoards(p1, p2) {
     }
 }
 
-export function renderAttackOnp1(e, x, y, p1, p2) {
+export async function renderAttackOnp1(x, y, p1, p2) {
     let attack = p1.attack(x, y)
+    let e = document.querySelector(`.p1-${x}-${y}`)
+
+    if (!attack)
+        aiPlay(p1, p2, true)
 
     if (attack === 'miss') {
         e.classList.add('miss')
         e.textContent = '-'
+        setHitPos(false)
         p1.setTurn(p2)
     }
     
     if (attack === 'hit') {
+        setHitPos(true, true, x, y)
         e.classList.add('hit')
         e.textContent = 'X'
         p1.board.board[x][y].ship.domTargets.push(e)
 
+        let isSunk = false
         if (p1.board.board[x][y].ship.isSunk()) {
             p1.board.board[x][y].ship.domTargets.forEach((t) => {
                 t.classList.add('sunk')
             })
+            isSunk = true
         }
 
         if (p1.board.areAllSunk()) {
-            renderWin(p2)
+            return renderWin(p2)
         }
-    }
 
-    return attack
+        await delay(1000);
+        return aiPlay(p1, p2, false, isSunk)
+    }
 }
 
 async function renderAttackOnp2(e, x, y, p1, p2) {
@@ -77,7 +87,7 @@ async function renderAttackOnp2(e, x, y, p1, p2) {
         e.textContent = '-'
         p2.setTurn(p1)
         await delay(1000);
-        aiPlay(p1, p2)
+        aiPlay(p1, p2, false)
     }
 
     if (attack === 'hit') {
@@ -103,13 +113,6 @@ function delay(delayInMs) {
         resolve(2);
       }, delayInMs);
     });
-}
-
-function aiPlay(p1, p2) {
-    let [x, y] = p2.randomPos()
-    let e = document.querySelector(`.p1-${x}-${y}`)
-    if (renderAttackOnp1(e, x, y, p1, p2) != 'miss')
-        aiPlay(p1, p2)
 }
 
 export function renderWin(player) {

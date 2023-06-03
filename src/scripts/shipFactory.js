@@ -21,13 +21,19 @@ export class Ship {
     }
 
     hit(pos) {
-        if (this.tiles[pos] === 'hit') return false
+        if (this.tiles[pos] === 'hit') 
+            return false
         this.tiles.splice(pos, 1, 'hit')
+        return 'hit'
     }
 
     isSunk() {
         if (this.tiles.some((tile) => tile != 'hit'))
             return false
         return true
+    }
+
+    isHit(pos) {
+        return this.tiles[pos] === 'hit'
     }
 }
