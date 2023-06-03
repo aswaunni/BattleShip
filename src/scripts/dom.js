@@ -5,6 +5,14 @@ import { aiPlay, setHitPos } from "./aiBot"
 export function renderButtons() {
     const reset = document.querySelector('.reset-btn')
     reset.addEventListener('click', resetBoards)
+
+    const okBtn = document.querySelector('.ok-btn')
+    okBtn.addEventListener('click', closeResultScreen)
+}
+
+function closeResultScreen() {
+    const resultScreen = document.querySelector('.result-screen')
+    resultScreen.classList.add('disable')
 }
 
 export function renderBoards(p1, p2) {
@@ -118,6 +126,9 @@ function delay(delayInMs) {
 export function renderWin(player) {
     const result = document.querySelector('.result')
     result.textContent = player.name + ' won!!!'
+
+    const resultScreen = document.querySelector('.result-screen')
+    resultScreen.classList.remove('disable')
 
     const p2Cell = document.querySelectorAll('.p2-cell')
     p2Cell.forEach((cell) => cell.classList.add('disable'))

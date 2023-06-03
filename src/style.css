@@ -11,7 +11,51 @@ body {
     align-items: center;
     width: 100vw;
     height: 100vh;
-    gap: 30px;
+    position: relative;
+}
+
+.game-screen, .result-screen {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100vw;
+    height: 100vh;
+}
+
+.game-screen {
+    position: relative;
+    padding: 20px;
+    z-index: 1;
+}
+
+.result-screen {
+  position: absolute;
+  top: 20vh;
+  left:  10vw;
+  width: 80%;
+  height: 60%;
+  background-color: rgb(205, 199, 199);
+  opacity: 0.85;
+  z-index: 2;
+  justify-content: center;
+  font-size: 5vw;
+}
+
+.h1 {
+  font-size: 5vw;
+  font-weight: 800;
+}
+
+.result-screen.disable {
+    display: none;
+}
+
+button {
+    font-size: 2vw;
+}
+
+.name {
+    font-size: 2vw;
 }
 
 .board-area {
@@ -70,4 +114,8 @@ body {
 .sunk {
     background-color: red;
     border: 1px solid red;
+}
+
+.result-screen{
+    z-index: 1;
 }
