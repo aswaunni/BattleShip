@@ -44,11 +44,13 @@ export function renderAttackOnp1(e, x, y, p1, p2) {
 
     if (attack === 'miss') {
         e.classList.add('miss')
+        e.textContent = '-'
         p1.setTurn(p2)
     }
     
     if (attack === 'hit') {
         e.classList.add('hit')
+        e.textContent = 'X'
         p1.board.board[x][y].ship.domTargets.push(e)
 
         if (p1.board.board[x][y].ship.isSunk()) {
@@ -72,6 +74,7 @@ async function renderAttackOnp2(e, x, y, p1, p2) {
 
     if (attack === 'miss') {
         e.classList.add('miss')
+        e.textContent = '-'
         p2.setTurn(p1)
         await delay(1000);
         aiPlay(p1, p2)
@@ -79,6 +82,7 @@ async function renderAttackOnp2(e, x, y, p1, p2) {
 
     if (attack === 'hit') {
         e.classList.add('hit')
+        e.textContent = 'X'
         p2.board.board[x][y].ship.domTargets.push(e)
 
         if (p2.board.board[x][y].ship.isSunk()) {
