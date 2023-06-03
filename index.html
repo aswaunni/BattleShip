@@ -8,20 +8,25 @@
     <script src="main.js" async></script>
 </head>
 <body>
-    <h1>Battleship</h1>
-    <div class="boards">
-        <div class="board-area">
-            <div>You</div>
-            <div class="board1"></div>
+    <div class="game-screen">
+        <div class="h1">Battleship</div>
+        <div class="boards">
+            <div class="board-area">
+                <div class="name">You</div>
+                <div class="board1"></div>
+            </div>
+            <div class="board-area">
+                <div class="name">Enemy</div>
+                <div class="board2"></div>
+            </div>
         </div>
-        <div class="board-area">
-            <div>Enemy</div>
-            <div class="board2"></div>
+        <div class="buttons">
+            <button class="reset-btn">Reset</button>
         </div>
     </div>
-    <div class="buttons">
-        <button class="reset-btn">Reset</button>
+    <div class="result-screen">
+        <div class="result">You vs Enemy</div>
+        <button class="ok-btn">OK</button>
     </div>
-    <div class="result">You vs Enemy</div>
 </body>
 </html>
